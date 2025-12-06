@@ -1,0 +1,398 @@
+﻿<process name="P-048- Monthly trading report Process-Room7" version="1.0" bpversion="7.4.1.15931" narrative="" byrefcollection="true" processrunningmessage="" disableversioning="false" preferredid="56b24bd7-74e3-4899-9265-cdba125f6dda">
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <subsheet subsheetid="bf96a856-2f1c-4a4a-afd6-5862900d4167" type="Normal" published="False">
+    <name>Create Excel</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>102</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="4c936485-7804-4197-b394-f9a2672db7e3" type="Normal" published="False">
+    <name>Create chart</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>42</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <stage stageid="bf2d8c77-a50f-4aa5-8893-4ea2c3a477b2" name="Start" type="Start">
+    <display x="15" y="-105" />
+  </stage>
+  <stage stageid="61f41ab3-26d6-43e5-91ae-9c7b768d6450" name="End" type="End">
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="e8b9d63b-60a1-4f9c-a217-d616141add2f" name="Stage1" type="ProcessInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="535670d0-536e-4300-abbc-2cc4c395dc20" name="Create Excel" type="SubSheetInfo">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="f17ce3cc-18f8-4fd4-9520-beb00503232c" name="Start" type="Start">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <display x="30" y="-240" />
+    <onsuccess>a2be2e44-0605-448a-b2bb-66f7d8689947</onsuccess>
+  </stage>
+  <stage stageid="aeb7ac3c-e11d-4c50-afe4-18c186ffa842" name="End" type="End">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <display x="30" y="450" />
+  </stage>
+  <stage stageid="a2be2e44-0605-448a-b2bb-66f7d8689947" name="Create Instance" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="-180" w="90" h="30" />
+    <inputs>
+      <input type="flag" name="Enable Events" friendlyname="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" friendlyname="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="handle" />
+    </outputs>
+    <onsuccess>5892090b-e89c-4d43-9c7f-b8856d92038f</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Create Instance" />
+  </stage>
+  <stage stageid="bc23143e-ea3d-46da-a777-54bb7c2319d7" name="handle" type="Data">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <display x="120" y="-135" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="5892090b-e89c-4d43-9c7f-b8856d92038f" name="Open Workbook" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="-135" w="90" h="30" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="File name" friendlyname="File name" narrative="The path and name of the file which should be opened." expr="[FileName]" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Workbook Name" />
+    </outputs>
+    <onsuccess>28483b74-850e-4356-b9a4-0958e83081d1</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Open Workbook" />
+  </stage>
+  <stage stageid="908fb21e-c3bb-4076-9ded-12b68d55b05c" name="Workbook Name" type="Data">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <display x="195" y="-105" w="180" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="28483b74-850e-4356-b9a4-0958e83081d1" name="Show" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="-90" w="90" h="30" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance which should have its window displayed. The default of zero indicates the currently active instance." expr="[handle]" />
+    </inputs>
+    <onsuccess>2199112a-92c3-4515-b37d-5e3f196da960</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Show" />
+  </stage>
+  <stage stageid="2199112a-92c3-4515-b37d-5e3f196da960" name="Create Worksheet" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="-45" w="90" h="30" />
+    <inputs>
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook in which the sheet should be created - The default empty value indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the worksheet should be created. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the sheet which should be activated. The default empty text value indicates that the currently active sheet should be, er, activated, making this a no-op." expr="&quot;Banks&quot;" />
+    </inputs>
+    <onsuccess>d96e7b4e-902a-4515-9bcd-1d79549ebff3</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Create Worksheet" />
+  </stage>
+  <stage stageid="1a4d4b2f-255e-4644-b301-9320f11aae42" name="FileName" type="Data">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="240" y="-30" w="240" h="60" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">C:\Users\User\OneDrive\Desktop\bulletins.xlsx</initialvalue>
+    <alwaysinit />
+  </stage>
+  <stage stageid="d96e7b4e-902a-4515-9bcd-1d79549ebff3" name="Activate Worksheet" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="0" w="90" h="30" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the worksheet which should be activated resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook in which the sheet exists - The default empty value indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the sheet which should be activated. The default empty text value indicates that the currently active sheet should be, er, activated, making this a no-op." expr="&quot;Worksheet 1&quot;" />
+      <input type="flag" name="Create If Missing?" friendlyname="Create If Missing?" narrative="True to create the sheet if it isn't present on the specified workbook; False to not do so." expr="" />
+    </inputs>
+    <onsuccess>84a287de-c229-433c-a56d-59c09b676f08</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Activate Worksheet" />
+  </stage>
+  <stage stageid="84a287de-c229-433c-a56d-59c09b676f08" name="Copy and Paste Worksheet Rangeas" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="45" w="90" h="30" />
+    <inputs>
+      <input type="number" name="Handle" friendlyname="Handle" expr="[handle]" />
+      <input type="text" name="Source Workbook" friendlyname="Source Workbook" expr="[Workbook Name]" />
+      <input type="text" name="Source Worksheet" friendlyname="Source Worksheet" expr="&quot;Worksheet 1&quot;" />
+      <input type="text" name="Source Range" friendlyname="Source Range" expr="&quot;A1:A20&quot;" />
+      <input type="text" name="Destination Workbook" friendlyname="Destination Workbook" expr="[Workbook Name]" />
+      <input type="text" name="Destination Worksheet" friendlyname="Destination Worksheet" expr="&quot;Banks&quot;" />
+      <input type="text" name="Destination Range" friendlyname="Destination Range" expr="&quot;A1:A20&quot;" />
+    </inputs>
+    <onsuccess>30cbe0cf-a79b-4738-ab59-91b94432ec1a</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Copy and Paste Worksheet Range" />
+  </stage>
+  <stage stageid="30cbe0cf-a79b-4738-ab59-91b94432ec1a" name="Autofit Columns Width" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="90" w="90" h="30" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the workbook should be activated. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbookname" friendlyname="Workbookname" narrative="The name of the workbook" expr="[Workbook Name]" />
+      <input type="text" name="Worksheetname" friendlyname="Worksheetname" narrative="The name of the worksheet " expr="&quot;Banks&quot;" />
+      <input type="text" name="Column Range" friendlyname="Column Range" narrative="Range of Columns to Autofit width. Eg &quot;A&quot; or &quot;A:Z&quot;" expr="&quot;A:M&quot;" />
+    </inputs>
+    <onsuccess>1ed4b172-f457-40de-9bfd-2af57cab46cb</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Autofit Columns Width" />
+  </stage>
+  <stage stageid="1ed4b172-f457-40de-9bfd-2af57cab46cb" name="Create Pivot Table" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="135" w="90" h="30" />
+    <inputs>
+      <input type="number" name="Handle" friendlyname="Handle" expr="[handle]" />
+      <input type="text" name="Workbook" friendlyname="Workbook" expr="[Workbook Name]" />
+      <input type="text" name="Worksheet" friendlyname="Worksheet" expr="&quot;Banks&quot;" />
+      <input type="flag" name="New Worksheet" friendlyname="New Worksheet" expr="True" />
+      <input type="text" name="Placement Cell" friendlyname="Placement Cell" expr="&quot;A1&quot;" />
+      <input type="text" name="Source Data Range" friendlyname="Source Data Range" expr="&quot;A2:M20&quot;" />
+      <input type="text" name="Pivot Table Name" friendlyname="Pivot Table Name" expr="&quot;TableOne&quot;" />
+    </inputs>
+    <onsuccess>5be109c9-f7a5-4798-b2f1-d9dfc066e5fb</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Create Pivot Table" />
+  </stage>
+  <stage stageid="5be109c9-f7a5-4798-b2f1-d9dfc066e5fb" name="Get Worksheet Name" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="180" />
+    <inputs>
+      <input type="number" name="Handle" friendlyname="Handle" expr="[handle]" />
+      <input type="text" name="Workbook" friendlyname="Workbook" expr="[Workbook Name]" />
+      <input type="number" name="Worksheet Position" friendlyname="Worksheet Position" expr="1" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Worksheet" friendlyname="Worksheet" stage="Worksheet" />
+    </outputs>
+    <onsuccess>e6d3c4fd-d11e-4e5e-b94e-5cc23435791a</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Get Worksheet Name" />
+  </stage>
+  <stage stageid="daaac452-7b27-4cc1-9dea-d2b36812d0f3" name="Worksheet" type="Data">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <display x="-90" y="195" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <alwaysinit />
+  </stage>
+  <stage stageid="e6d3c4fd-d11e-4e5e-b94e-5cc23435791a" name="Add Value High" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="225" />
+    <inputs>
+      <input type="number" name="Handle" friendlyname="Handle" expr="[handle]" />
+      <input type="text" name="Workbook" friendlyname="Workbook" expr="[Workbook Name]" />
+      <input type="text" name="Worksheet" friendlyname="Worksheet" expr="" />
+      <input type="text" name="Pivot Table Name" friendlyname="Pivot Table Name" expr="&quot;TableOne&quot;" />
+      <input type="text" name="Field Name" friendlyname="Field Name" expr="&quot;High price&quot;" />
+      <input type="number" name="Position" friendlyname="Position" expr="1" />
+    </inputs>
+    <onsuccess>e8de8f80-792f-47be-b93e-1628e7f274da</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Add Values to Pivot Table" />
+  </stage>
+  <stage stageid="e8de8f80-792f-47be-b93e-1628e7f274da" name="Add Columns to Low" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="270" />
+    <inputs>
+      <input type="number" name="Handle" friendlyname="Handle" expr="[handle]" />
+      <input type="text" name="Workbook" friendlyname="Workbook" expr="[Workbook Name]" />
+      <input type="text" name="Worksheet" friendlyname="Worksheet" expr="" />
+      <input type="text" name="Pivot Table Name" friendlyname="Pivot Table Name" expr="&quot;TableOne&quot;" />
+      <input type="text" name="Field Name" friendlyname="Field Name" expr="&quot;Low price&quot;" />
+      <input type="number" name="Position" friendlyname="Position" expr="1" />
+    </inputs>
+    <onsuccess>4c219d7a-9ac5-41b6-aee1-7cfe65e57bf7</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Add Values to Pivot Table" />
+  </stage>
+  <stage stageid="4c219d7a-9ac5-41b6-aee1-7cfe65e57bf7" name="Add Row Labels to Pivot Table" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="330" />
+    <inputs>
+      <input type="number" name="Handle" friendlyname="Handle" expr="[handle]" />
+      <input type="text" name="Workbook" friendlyname="Workbook" expr="[Workbook Name]" />
+      <input type="text" name="Worksheet" friendlyname="Worksheet" expr="" />
+      <input type="text" name="Pivot Table Name" friendlyname="Pivot Table Name" expr="&quot;TableOne&quot;" />
+      <input type="text" name="Field Name" friendlyname="Field Name" expr="&quot;Company&quot;" />
+      <input type="number" name="Position" friendlyname="Position" expr="1" />
+    </inputs>
+    <onsuccess>509462af-4d21-4dbf-95a0-d2135626099f</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Add Row Labels to Pivot Table" />
+  </stage>
+  <stage stageid="6cc90cb5-148a-49c8-a06a-aaede274e3f0" name="Create chart" type="SubSheetInfo">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <display x="-285" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="b6188cf5-d6d6-42cf-92e4-4860d7cbf62a" name="Start" type="Start">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <display x="-15" y="-210" />
+    <onsuccess>1f3d83f1-d6e0-42b7-8133-3920aefd3db3</onsuccess>
+  </stage>
+  <stage stageid="c37f6caa-1d98-41cb-a2d7-3602cdf86372" name="End" type="End">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <display x="-15" y="240" />
+  </stage>
+  <stage stageid="1f3d83f1-d6e0-42b7-8133-3920aefd3db3" name="Create Instance" type="Action">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="-165" />
+    <inputs>
+      <input type="flag" name="Enable Events" friendlyname="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" friendlyname="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="handle" />
+    </outputs>
+    <onsuccess>19eeec0f-c912-4ce7-a0c3-dce384f2596b</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="6a54aedb-1524-4e1b-a4b3-d9926313b60f" name="Close Instance" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="405" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance to be closed. Zero indicates the currently active instance." expr="[handle]" />
+      <input type="flag" name="Save Changes" friendlyname="Save Changes" narrative="True to save the changes to the open workbooks on the instance, False to discard any changes. Default is False." expr="True" />
+    </inputs>
+    <onsuccess>aeb7ac3c-e11d-4c50-afe4-18c186ffa842</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Close Instance" />
+  </stage>
+  <stage stageid="509462af-4d21-4dbf-95a0-d2135626099f" name="Close Workbook" type="Action">
+    <subsheetid>bf96a856-2f1c-4a4a-afd6-5862900d4167</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="30" y="375" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the workbook which should be closed resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook which should be closed." expr="[Workbook Name]" />
+      <input type="flag" name="Save Data" friendlyname="Save Data" narrative="True to save the data before closing the workbook; The default of False will discard any changes before closing the workbook." expr="True" />
+    </inputs>
+    <onsuccess>6a54aedb-1524-4e1b-a4b3-d9926313b60f</onsuccess>
+    <resource object="MS Excel VBO - Extended_P-459-OP-RC" action="Close Workbook" />
+  </stage>
+  <stage stageid="ef946a7d-b318-484b-8f1e-867356d4e530" name="handle" type="Data">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <display x="105" y="-165" w="90" h="30" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="19eeec0f-c912-4ce7-a0c3-dce384f2596b" name="Open Workbook" type="Action">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="-120" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="File name" friendlyname="File name" narrative="The path and name of the file which should be opened." expr="[FileName]" />
+      <input type="number" name="Timeout" friendlyname="Timeout" narrative="The time available for the action to complete." expr="" />
+      <input type="text" name="Password" friendlyname="Password" narrative="Optional. The password required to open the workbook. This only applies to workbooks that were saved with a password." expr="" />
+      <input type="flag" name="Update Links" friendlyname="Update Links" narrative="Optional. Flag that controls whether external references (links) in the file, such as the reference to other Workbooks, are updated. Default value is True." expr="" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Workbook Name" />
+    </outputs>
+    <onsuccess>277fa2d2-c53f-4bd9-8a83-7debe32cb687</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="d86202d7-edc7-4329-a9b2-b407aad203c2" name="Workbook Name" type="Data">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <display x="90" y="-120" w="90" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="277fa2d2-c53f-4bd9-8a83-7debe32cb687" name="Show" type="Action">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="-75" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance which should have its window displayed. The default of zero indicates the currently active instance." expr="[handle]" />
+    </inputs>
+    <onsuccess>ec78e408-9d32-4a4d-853d-77daff4518b8</onsuccess>
+    <resource object="MS Excel VBO" action="Show" />
+  </stage>
+  <stage stageid="ec78e408-9d32-4a4d-853d-77daff4518b8" name="Activate Worksheet" type="Action">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="-30" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the worksheet which should be activated resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook in which the sheet exists - The default empty value indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the sheet which should be activated. The default empty text value indicates that the currently active sheet should be, er, activated, making this a no-op." expr="[Worksheet]" />
+      <input type="flag" name="Create If Missing?" friendlyname="Create If Missing?" narrative="True to create the sheet if it isn't present on the specified workbook; False to not do so." expr="" />
+    </inputs>
+    <onsuccess>67d17b85-d4be-48bd-bd3b-6283714eb507</onsuccess>
+    <resource object="MS Excel VBO" action="Activate Worksheet" />
+  </stage>
+  <stage stageid="67d17b85-d4be-48bd-bd3b-6283714eb507" name="Draw Chart from Range" type="Action">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="15" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the worksheet which should be retrieved resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook which contains the sheet required. The default empty text indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the worksheet within the specified workbook which should be written to a collection. The default empty text indicates the currently active worksheet within the specified workbook." expr="&quot;Sheet2&quot;" />
+      <input type="text" name="Worksheet Range" friendlyname="Worksheet Range" narrative="The starting and ending Cell Values for the Data to be charted (Example &quot;A1:D25&quot;" expr="&quot;A1:D21&quot;" />
+      <input type="number" name="Chart Type" friendlyname="Chart Type" narrative="This is a number indicating the Chart Type (List can be found at (https://docs.microsoft.com/en-us/office/vba/api/excel.xlcharttype)." expr="57" />
+      <input type="text" name="Chart Name" friendlyname="Chart Name" narrative="The Name of the Chart.  The chart will be stored in a sheet with this name." expr="&quot;Chart&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Was Operation Successful" stage="" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Message (Success or Detailed Exception Msg)" stage="" />
+    </outputs>
+    <onsuccess>5437bd93-706f-4f53-a37e-2b1ab0231c4f</onsuccess>
+    <resource object="MS Excel VBO" action="Draw Chart from Range" />
+  </stage>
+  <stage stageid="14d56d7a-75ef-4729-84ec-262c2d2de65d" name="Save Workbook" type="Action">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="180" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the workbook which should be saved resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook which should be saved" expr="[Workbook Name]" />
+      <input type="number" name="TitmeOut" friendlyname="TitmeOut" narrative="The timeout value. Default 30 Minimum is 10 seconds." expr="" />
+    </inputs>
+    <onsuccess>c37f6caa-1d98-41cb-a2d7-3602cdf86372</onsuccess>
+    <resource object="MS Excel VBO" action="Save Workbook" />
+  </stage>
+  <stage stageid="5437bd93-706f-4f53-a37e-2b1ab0231c4f" name="Copy Chart to Clipboard" type="Action">
+    <subsheetid>4c936485-7804-4197-b394-f9a2672db7e3</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="90" />
+    <inputs>
+      <input type="number" name="handle" friendlyname="handle" narrative="The integer handle identifying the instance on which the worksheet which should be retrieved resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" friendlyname="Workbook Name" narrative="The name of the workbook which contains the sheet required. The default empty text indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" friendlyname="Worksheet Name" narrative="The name of the worksheet within the specified workbook which should be written to a collection. The default empty text indicates the currently active worksheet within the specified workbook." expr="&quot;Sheet2&quot;" />
+      <input type="text" name="Chart Name" friendlyname="Chart Name" expr="&quot;Chart&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Was Operation Successful" stage="" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Message (Success or Detailed Exception Msg)" stage="" />
+    </outputs>
+    <onsuccess>14d56d7a-75ef-4729-84ec-262c2d2de65d</onsuccess>
+    <resource object="MS Excel VBO" action="Copy Chart to Clipboard" />
+  </stage>
+</process>
